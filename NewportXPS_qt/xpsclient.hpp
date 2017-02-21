@@ -2,6 +2,7 @@
 #include <QObject>
 #include <QTcpSocket>
 #include <QString>
+#include <QThread>
 
 class xpsClient : public QObject {
 	Q_OBJECT
@@ -33,8 +34,6 @@ public:
 		groupMoveRelative
 	};
 	struct socketException { QString errorString; };
-
-
 
 	QString xpsQ8_writeAndQuery(QByteArray message, qint16 writeTimeout, qint16 readTimeout);
 	QStringList xpsQ8_getGroupNames();
@@ -69,9 +68,17 @@ private:
 	QList<QString> xpsGroups;
 	QList<QString> xpsPositioners;
 	QList<QString> xpsGPIO;
-
-
-
-
 	
+};
+
+class xpsWorker : public xpsClient
+{
+	Q_OBJECT
+		QThread workerThread;
+
+public slots:
+	void xpsQ8_checkStagesStatusAndPositions(xpsClient *xpsClient = Q_NULLPTR);
+
+signals:
+	void xpsQ8_updateStagesStatusAndPositions(QList<QString> statusesAndPositions);
 };

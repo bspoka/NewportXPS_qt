@@ -11,7 +11,7 @@
 //#include "xpsclient.hpp"
 
 mainWindow::mainWindow(QWidget *parent)
-	: QMainWindow(parent), xpsSocket(new xpsClient(this))
+	: QMainWindow(parent), xpsSocket(new xpsClient(this)), stagePanels(QList<stagePanel*>())
 {
 	QApplication::setStyle(QStyleFactory::create("Fusion"));
 	ui.setupUi(this);
