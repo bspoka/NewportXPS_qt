@@ -6,6 +6,7 @@
 #include "stagepanel.hpp"
 #include <QStyle>
 #include <QStyleFactory>
+#include <QThread>
 
 //#include "xpsclient.hpp"
 
