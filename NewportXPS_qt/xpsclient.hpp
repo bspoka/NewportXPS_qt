@@ -70,15 +70,3 @@ private:
 	QList<QString> xpsGPIO;
 	
 };
-
-class xpsWorker : public xpsClient
-{
-	Q_OBJECT
-		QThread workerThread;
-
-public slots:
-	void xpsQ8_checkStagesStatusAndPositions(xpsClient *xpsClient = Q_NULLPTR);
-
-signals:
-	void xpsQ8_updateStagesStatusAndPositions(QList<QString> statusesAndPositions);
-};
